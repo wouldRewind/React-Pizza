@@ -10,11 +10,11 @@ import Button from "./Button"
 
 
 function App() {
+
+
   return (
     <div className="wrapper">
       <Header/>
-      <Button outline text="Добавить"/>
-      <Button  text="Добавить"/>
       <div className="content">
         <div className="container">
           <div className="content__top">
