@@ -1,13 +1,35 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
-function SortPopup() {
-    const [visiblePopup,setVisiblePopup] = React.useState(false);
+function SortPopup({items}) {
+
+    const [visiblePopup,setVisiblePopup] = useState(false)
+    const sortRef = useRef()
+    const [activeItem,setActiveItem] = useState(0)
+    const activeLabel = items[activeItem] // чтобы изменить значение в "сортировка по"
+
+    console.log(sortRef.current)
+
     console.log(visiblePopup);
 
+    const toggleVisiblePopup = () => setVisiblePopup(!visiblePopup)
+
+    const handkeOutsideClick = e => {
+      if(!e.path.includes(sortRef.current)) setVisiblePopup(false); 
+    }
+
+    const onSelectItem = index => {
+      setActiveItem(index)
+      setVisiblePopup(false)
+    } ;
+
+    useEffect(() => {      
+      document.body.addEventListener('click', handkeOutsideClick);
+    },[])
+
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
               <div className="sort__label">
-                <svg
+                <svg className={!visiblePopup ? "rotated" : ""}
                   width="10"
                   height="6"
                   viewBox="0 0 10 6"
@@ -20,13 +42,17 @@ function SortPopup() {
                   />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setVisiblePopup(!visiblePopup)}>популярности</span>
+                <span onClick={() => toggleVisiblePopup()}>{activeLabel}</span>
               </div>
-              {visiblePopup && <div className="sort__popup">
+              {visiblePopup && 
+              <div className="sort__popup">
                 <ul>
-                  <li className="active">популярности</li>
-                  <li>цене</li>
-                  <li>алфавиту</li>
+                  {items &&
+                  items.map((name,index) => (
+                    <li onClick={() => onSelectItem(index) } className={activeItem === index ? "active" : ""} key={`${name}_${index}`}>{name}</li>
+                  ))
+                  }
+              
                 </ul>
               </div>}
             </div>

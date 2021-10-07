@@ -1,0 +1,41 @@
+[33mcommit 009d5edd834792ad3f0ad9077bd9d3fc171355c2[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mpizza/master[m[33m)[m
+Author: wouldRewind <nik.152002@mail.ru>
+Date:   Wed Sep 29 18:23:34 2021 +0300
+
+    now we can choose the category and show/hide sort panel
+
+[33mcommit f24c41f0f5ce3fa1f1a46a66dcdc16a3caa87e28[m
+Author: wouldRewind <nik.152002@mail.ru>
+Date:   Fri Sep 24 15:44:40 2021 +0300
+
+    step4: used hook 'useState' in categories component
+
+[33mcommit 25eb9fee0fdc23d84c9ae2a6d8a958c700b754d7[m
+Author: wouldRewind <nik.152002@mail.ru>
+Date:   Wed Sep 22 22:20:08 2021 +0300
+
+    step3: incapsulated categories in component, 'smart' export using
+
+[33mcommit 90af126277db225fdcca8e6ce1c344702159c431[m
+Author: wouldRewind <nik.152002@mail.ru>
+Date:   Tue Sep 21 23:41:26 2021 +0300
+
+    step3: moved button layout to button component
+
+[33mcommit eb73b6c592bf69b7cb7ed5421a74ea66291df5dd[m
+Author: wouldRewind <nik.152002@mail.ru>
+Date:   Tue Sep 21 20:11:40 2021 +0300
+
+    step 2: created button and header components, try out props in work
+
+[33mcommit aadce11622694465b5b68947b9f47ddcbbfa4172[m
+Author: wouldRewind <nik.152002@mail.ru>
+Date:   Tue Sep 21 19:26:43 2021 +0300
+
+    init,delete the heck
+
+[33mcommit 2f93dab289a1723c901c014d53afe7d4bcff9805[m
+Author: wouldRewind <nik.152002@mail.ru>
+Date:   Tue Sep 21 16:29:50 2021 +0300
+
+    Initialize project using Create React App
