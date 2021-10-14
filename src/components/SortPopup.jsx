@@ -1,15 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 function SortPopup({items}) {
-
     const [visiblePopup,setVisiblePopup] = useState(false)
     const sortRef = useRef()
     const [activeItem,setActiveItem] = useState(0)
     const activeLabel = items[activeItem] // чтобы изменить значение в "сортировка по"
-
-    console.log(sortRef.current)
-
-    console.log(visiblePopup);
 
     const toggleVisiblePopup = () => setVisiblePopup(!visiblePopup)
 

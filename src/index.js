@@ -9,10 +9,8 @@ import App from './App';
 import { Header } from './components';
 
 ReactDOM.render(
-  <React.StrictMode>
     <Router>
       <App />
-    </Router>
-  </React.StrictMode>,
+    </Router>,
   document.getElementById('root')
 );
