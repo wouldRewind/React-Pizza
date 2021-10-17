@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 import React,{useState} from 'react'
+import PropTypes from "prop-types";
+
 function PizzaBlock({ name,price,imageUrl,types,sizes }) {
 
     const typeNames = ['тонкое','традиционное']
@@ -32,8 +34,8 @@ function PizzaBlock({ name,price,imageUrl,types,sizes }) {
               onClick={() => onSelectSize(size)} 
               className={classNames({
                   active: activeSize === size,
-                  disabled: sizes ? !sizes.includes(size) : false // типы должны придти, types != undefined
-              })}>{size}</li>)}
+                  disabled: sizes ? !sizes.includes(size) : false // разммеры должны придти, types != undefined
+              })}>{size} см</li>)}
         
           </ul>
         </div>
@@ -59,5 +61,19 @@ function PizzaBlock({ name,price,imageUrl,types,sizes }) {
       </div>
     )
 }
+
+
+PizzaBlock.propTypes = {
+  name: PropTypes.string,
+  imageUrl: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  types: PropTypes.arrayOf(PropTypes.number).isRequired,
+  sizes: PropTypes.arrayOf(PropTypes.number).isRequired
+}
+
+PizzaBlock.defaultProps = {
+  types: []
+}
+
 
 export default PizzaBlock
