@@ -1,23 +1,29 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Route } from "react-router";
-import {Header,Button,Categories,SortPopup} from "./components"
+import {Header} from "./components"
 import {Cart, Home} from "./pages";
 import { setPizzas } from "./redux/actions/pizzas";
-import { connect } from "react-redux";
-import store from "./redux/store";
+import { connect, useSelector,useDispatch } from "react-redux";
+
+// useSelector вытаскивает данные из стейта
+// useDispatch возвращает диспач-функцию. Если ее вызвать и прокинуть action, мы поменяем стейт
+
+
 
 function App(props) {
+
+  const dispatch = useDispatch();
+  const storage = useSelector(state => state)
+  console.log(storage)
 
 
   React.useEffect(() => {
     axios.get("http://localhost:3000/db.json")
     .then(({ data: {pizzas} }) => {
-      props.setPizzas(pizzas)
+      dispatch(setPizzas(pizzas))
     } )
   },[])
-
 
   return (
     <div className="wrapper">
@@ -25,19 +31,23 @@ function App(props) {
       <div className="content">
         <Route exact path="/" render={() => <Home items={props.items}/>}/>
         <Route exact path="/cart" component={Cart}/>
-
       </div>
     </div>
   )
 }
 
 
-const mapStateToProps = state => ({
-  items: state.pizzas.items  
-})
+export default App;
 
-const mapDispatchToProps = {
-  setPizzas
-}
+// const mapStateToProps = state => ({
+//   ...state.pizzas // дропну полный стейт в приложении
+// })
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+// const mapDispatchToProps = {
+//   setPizzas
+// }
+
+// // mapStateToProps - прокидываем state как props
+// // mapDispatchToProps - теперь диспач вызывается прямо из action
+
+// export default connect(mapStateToProps,mapDispatchToProps)(App); // прокидываю Redux-стейт в App компонент
