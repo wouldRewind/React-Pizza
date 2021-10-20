@@ -4,24 +4,22 @@ import { Route } from "react-router";
 import {Header} from "./components"
 import {Cart, Home} from "./pages";
 import { setPizzas } from "./redux/actions/pizzas";
-import { connect, useSelector,useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-// useSelector вытаскивает данные из стейта
+//
+// useSelector вытаскивает данные из стейта. Благодаря нему я могу в любом месте вытащить стейт из редакса
 // useDispatch возвращает диспач-функцию. Если ее вызвать и прокинуть action, мы поменяем стейт
 
 
 
-function App(props) {
+function App() {
 
   const dispatch = useDispatch();
-  const storage = useSelector(state => state)
-  console.log(storage)
-
-
+  
   React.useEffect(() => {
-    axios.get("http://localhost:3000/db.json")
+    axios.get("http://localhost:3000/db.json") // идем за пиццами
     .then(({ data: {pizzas} }) => {
-      dispatch(setPizzas(pizzas))
+      dispatch(setPizzas(pizzas));
     } )
   },[])
 
@@ -29,7 +27,7 @@ function App(props) {
     <div className="wrapper">
       <Header/>
       <div className="content">
-        <Route exact path="/" render={() => <Home items={props.items}/>}/>
+        <Route exact path="/" component={Home}/>
         <Route exact path="/cart" component={Cart}/>
       </div>
     </div>
@@ -39,6 +37,8 @@ function App(props) {
 
 export default App;
 
+// логика прокидывания стейта в приложения без хуков(запарнее)
+ 
 // const mapStateToProps = state => ({
 //   ...state.pizzas // дропну полный стейт в приложении
 // })

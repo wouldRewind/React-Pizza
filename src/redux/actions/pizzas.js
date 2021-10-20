@@ -5,8 +5,8 @@ export const setPizzas = items => ({
 }
 )
 
-export const setCategory = catIndex => ({
-    type: "SET_SORT_BY",
-    payload: catIndex
-}
-)
+// export const setCategory = catIndex => ({
+//     type: "SET_SORT_BY",
+//     payload: catIndex
+// }
+// )
