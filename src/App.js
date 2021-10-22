@@ -1,10 +1,7 @@
-import axios from "axios";
 import React from "react";
 import { Route } from "react-router";
 import {Header} from "./components"
 import {Cart, Home} from "./pages";
-import { setPizzas } from "./redux/actions/pizzas";
-import { useDispatch } from "react-redux";
 
 //
 // useSelector вытаскивает данные из стейта. Благодаря нему я могу в любом месте вытащить стейт из редакса
@@ -13,16 +10,6 @@ import { useDispatch } from "react-redux";
 
 
 function App() {
-
-  const dispatch = useDispatch();
-  
-  React.useEffect(() => {
-    axios.get("http://localhost:3000/db.json") // идем за пиццами
-    .then(({ data: {pizzas} }) => {
-      dispatch(setPizzas(pizzas));
-    } )
-  },[])
-
   return (
     <div className="wrapper">
       <Header/>

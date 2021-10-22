@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 
-function Categories({items,onChangeCategory}) {
+
+const Categories = React.memo(
+  function Categories({items,onChangeCategory}) {
 
     const [activeItem, setActiveItem] = useState(null)
 
@@ -8,6 +10,7 @@ function Categories({items,onChangeCategory}) {
       setActiveItem(index)
       onChangeCategory(index)
     } 
+    console.log("RERENDER")
     return (
         <div className="categories">
               <ul>
@@ -22,5 +25,7 @@ function Categories({items,onChangeCategory}) {
             </div>
     )
 }
+)
+
 
 export default Categories
