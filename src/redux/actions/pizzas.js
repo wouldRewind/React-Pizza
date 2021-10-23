@@ -2,6 +2,11 @@
 
 import axios from "axios";
 
+export const setLoaded = payload => ({
+    type: "SET_LOADED",
+    payload
+})
+
 export const setPizzas = items => ({
     type: "SET_PIZZAS",
     payload: items
@@ -10,12 +15,16 @@ export const setPizzas = items => ({
 
 
 //Если параметр экшена функция - redux-thunk вызовет ее и запихнет туда диспач и гет стейт (под капотом)
-export const fetchPizzas = () => dispatch => (
-    axios.get("http://localhost:3001/pizzas") // идем за пиццами
-    .then(({ data }) => {
-        dispatch(setPizzas(data))
-    }  )
-)
+export const fetchPizzas = () => dispatch =>
+    {
+        dispatch(setLoaded(false))
+        axios.get("http://localhost:3001/pizzas") // идем за пиццами
+        .then(({ data }) => {
+            dispatch(setPizzas(data))
+        }  )
+        }       
+    
+
 
 
 
