@@ -15,10 +15,11 @@ export const setPizzas = items => ({
 
 
 //Если параметр экшена функция - redux-thunk вызовет ее и запихнет туда диспач и гет стейт (под капотом)
-export const fetchPizzas = () => dispatch =>
+export const fetchPizzas = ({ type,order },category) => dispatch =>
     {
+        console.log(type)
         dispatch(setLoaded(false))
-        axios.get("http://localhost:3001/pizzas") // идем за пиццами
+        axios.get(`http://localhost:3001/pizzas?${category !== null ? `category=${category}` : ''}&_sort=${type}&_order=${order}`) // идем за пиццами
         .then(({ data }) => {
             dispatch(setPizzas(data))
         }  )

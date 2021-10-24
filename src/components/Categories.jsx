@@ -21,13 +21,11 @@ const Categories = React.memo(
 
 
 Categories.propTypes = {
-  activeCategory: PropTypes.oneOf([PropTypes.number.isRequired,null]),
   items: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChangeCategory: PropTypes.func.isRequired
 }
 
 Categories.defaultProps = {
-  activeCategory: null,
   items: [],  
 }
 

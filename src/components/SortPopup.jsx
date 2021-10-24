@@ -4,16 +4,14 @@ import PropTypes from "prop-types"
 const SortPopup = React.memo(function SortPopup({ items ,activeSortType, onClickSortType }) {
   const [visiblePopup,setVisiblePopup] = useState(false)
   const sortRef = useRef()
-  console.log(activeSortType)
   const activeLabel = items.find(obj => obj.type === activeSortType).name // чтобы изменить значение в "сортировка по"
-  console.log(activeLabel)
+
   const toggleVisiblePopup = () => setVisiblePopup(!visiblePopup)
 
   const handkeOutsideClick = e => {
     if(!e.path.includes(sortRef.current)) setVisiblePopup(false); 
   }
 
-  console.log("RERENDER SORT POPUP")
 
   const onSelectItem = type => {
     onClickSortType && onClickSortType(type) // onClickSortType - устанавливает тип сортировки
@@ -46,8 +44,8 @@ const SortPopup = React.memo(function SortPopup({ items ,activeSortType, onClick
             <div className="sort__popup">
               <ul>
                 {items &&
-                items.map(({ name,type},index) => (
-                  <li onClick={() => onSelectItem(type) } className={activeSortType === type ? "active" : ""} key={`${name}_${index}`}>{name}</li>
+                items.map((obj,index) => (
+                  <li onClick={() => onSelectItem(obj) } className={activeSortType === obj.type ? "active" : ""} key={`${obj.name}_${index}`}>{obj.name}</li>
                 ))
                 }
             
