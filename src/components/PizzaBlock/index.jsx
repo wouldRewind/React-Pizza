@@ -1,20 +1,43 @@
 import classNames from 'classnames'
 import React,{useState} from 'react'
 import PropTypes from "prop-types";
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { Button } from '..';
+export default function PizzaBlock({ id,name,price,imageUrl,types,sizes,onClickAddPizza }) {
 
-export default function PizzaBlock({ name,price,imageUrl,types,sizes }) {
 
     const typeNames = ['тонкое','традиционное']
     const availableSizes = [26,30,40]
     const [activeType, setActiveType] = useState(types ? types[0]: 0)
     const [activeSize, setActiveSize] = useState(sizes ? sizes[0]: availableSizes[0])
+    
+    console.log(activeSize);
+
+    const dispatch = useDispatch()
+    const { items } = useSelector(({ cart }) => cart)
 
     const onSelectType = index => setActiveType(index)
     const onSelectSize = size => setActiveSize(size)
 
+
+    const onAddPizza = () => {
+      const obj = {
+        id,
+        name,
+        imageUrl,
+        type: availableSizes[activeType],
+        size: typeNames[activeType]
+      }
+      onClickAddPizza(obj)
+    }
+
+
   return (
     <div className="pizza-block">
+      <ul>
+        {Object.keys(items).map(name => <li key={name}>{name}</li>)}
+      </ul>
     <img
       className="pizza-block__image"
       src={imageUrl}
@@ -42,7 +65,7 @@ export default function PizzaBlock({ name,price,imageUrl,types,sizes }) {
     </div>
     <div className="pizza-block__bottom">
       <div className="pizza-block__price">от {price} ₽</div>
-      <div className="button button--outline button--add">
+      <Button onClick={() => onAddPizza()} className="button--add" outline>
         <svg
           width="12"
           height="12"
@@ -56,8 +79,8 @@ export default function PizzaBlock({ name,price,imageUrl,types,sizes }) {
           />
         </svg>
         <span>Добавить</span>
-        <i>2</i>
-      </div>
+        <i>0</i>
+      </Button>
     </div>
   </div>
 )
@@ -70,6 +93,7 @@ PizzaBlock.propTypes = {
   price: PropTypes.number.isRequired,
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+  onAddPizza: PropTypes.func
 }
 
 PizzaBlock.defaultProps = {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { Categories,SortPopup,PizzaBlock, PizzaLoadingBlock } from "../components"
+import { addPizzaToCart } from '../redux/actions/cart'
 import { setCategory, setSortBY } from '../redux/actions/filters'
 import { fetchPizzas } from '../redux/actions/pizzas'
 
@@ -30,6 +31,9 @@ function Home() {
 
     const onSelectSortPopup = type => dispatch(setSortBY(type))
 
+    const handleAddPizzaToCart = obj => {
+      dispatch(addPizzaToCart(obj))
+    }
     return (
         <div className="container">
           <div className="content__top">
@@ -42,7 +46,7 @@ function Home() {
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             {
-              isLoaded ? items.map(obj => <PizzaBlock  key={`${obj.id}_${obj.name}`} {...obj} />): 
+              isLoaded ? items.map(obj => <PizzaBlock onClickAddPizza={handleAddPizzaToCart}  key={`${obj.id}_${obj.name}`} {...obj} />): 
               Array.from(Array(10),(item,index) => <PizzaLoadingBlock key={index}/>)
             }
           </div>
