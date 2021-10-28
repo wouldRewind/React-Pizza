@@ -13,15 +13,18 @@ const sortItems = [{name: "популярности",type: 'rating', order: 'des
 function Home() {
 
   const { items } = useSelector(({ pizzas }) => pizzas)
+  const { items : cartItems} = useSelector(({ cart }) => cart)
   const { isLoaded } = useSelector(({ pizzas }) => pizzas)
   const { category, sortBy } = useSelector(({ filters }) => filters)
+
+  console.log(cartItems)
 
 
   React.useEffect(() => {
       dispatch(fetchPizzas(sortBy,category))
   },[category,sortBy])
 
-  // в родительском компоненте получаю, прокидываю через пропс в дочерние
+  // в родительском компоненте получаю, прокидываю через пропс в черние
 
   const dispatch = useDispatch() // хей, в этом компоненте я буду менять категорию в стейте!
   
@@ -46,7 +49,9 @@ function Home() {
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             {
-              isLoaded ? items.map(obj => <PizzaBlock onClickAddPizza={handleAddPizzaToCart}  key={`${obj.id}_${obj.name}`} {...obj} />): 
+              isLoaded ? items.map(obj => <PizzaBlock
+                 addedCount={(cartItems[obj.id] || 0) && cartItems[obj.id].length} 
+                 onClickAddPizza={handleAddPizzaToCart}  key={`${obj.id}_${obj.name}`} {...obj} />): 
               Array.from(Array(10),(item,index) => <PizzaLoadingBlock key={index}/>)
             }
           </div>

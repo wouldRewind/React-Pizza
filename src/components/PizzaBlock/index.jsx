@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Button } from '..';
-export default function PizzaBlock({ id,name,price,imageUrl,types,sizes,onClickAddPizza }) {
+export default function PizzaBlock({ addedCount, id,name,price,imageUrl,types,sizes,onClickAddPizza }) {
 
 
     const typeNames = ['тонкое','традиционное']
@@ -27,7 +27,8 @@ export default function PizzaBlock({ id,name,price,imageUrl,types,sizes,onClickA
         name,
         imageUrl,
         type: availableSizes[activeType],
-        size: typeNames[activeType]
+        size: typeNames[activeType],
+        price
       }
       onClickAddPizza(obj)
     }
@@ -35,9 +36,6 @@ export default function PizzaBlock({ id,name,price,imageUrl,types,sizes,onClickA
 
   return (
     <div className="pizza-block">
-      <ul>
-        {Object.keys(items).map(name => <li key={name}>{name}</li>)}
-      </ul>
     <img
       className="pizza-block__image"
       src={imageUrl}
@@ -79,7 +77,7 @@ export default function PizzaBlock({ id,name,price,imageUrl,types,sizes,onClickA
           />
         </svg>
         <span>Добавить</span>
-        <i>0</i>
+        <i>{addedCount}</i>
       </Button>
     </div>
   </div>
@@ -93,7 +91,8 @@ PizzaBlock.propTypes = {
   price: PropTypes.number.isRequired,
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
-  onAddPizza: PropTypes.func
+  onAddPizza: PropTypes.func,
+  addedCount: PropTypes.number
 }
 
 PizzaBlock.defaultProps = {
