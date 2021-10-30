@@ -11,11 +11,6 @@ export default function PizzaBlock({ addedCount, id,name,price,imageUrl,types,si
     const availableSizes = [26,30,40]
     const [activeType, setActiveType] = useState(types ? types[0]: 0)
     const [activeSize, setActiveSize] = useState(sizes ? sizes[0]: availableSizes[0])
-    
-    console.log(activeSize);
-
-    const dispatch = useDispatch()
-    const { items } = useSelector(({ cart }) => cart)
 
     const onSelectType = index => setActiveType(index)
     const onSelectSize = size => setActiveSize(size)
@@ -26,8 +21,8 @@ export default function PizzaBlock({ addedCount, id,name,price,imageUrl,types,si
         id,
         name,
         imageUrl,
-        type: availableSizes[activeType],
-        size: typeNames[activeType],
+        type: typeNames[activeType],
+        size: activeSize,
         price
       }
       onClickAddPizza(obj)

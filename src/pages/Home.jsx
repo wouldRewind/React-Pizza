@@ -17,7 +17,6 @@ function Home() {
   const { isLoaded } = useSelector(({ pizzas }) => pizzas)
   const { category, sortBy } = useSelector(({ filters }) => filters)
 
-  console.log(cartItems)
 
 
   React.useEffect(() => {
