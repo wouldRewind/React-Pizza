@@ -26,14 +26,11 @@ const cart = (state = initialState,action) => {
             return initialState
         case "ON_PIZZA_DECREASE":
             return produce(state,draft => {
-
-
-                draft.totalPrice -= draft.items[action.payload][0].price
-                draft.items[action.payload].pop()
-                draft.totalCount--
-                if(!draft.items[action.payload].length)
-                    delete draft.items[action.payload]
-
+                if(draft.items[action.payload].length > 1) {
+                    draft.totalPrice -= draft.items[action.payload][0].price
+                    draft.items[action.payload].pop()
+                    draft.totalCount--
+                }
                 //action.payload == айди пиццы
             })
             case "ON_PIZZA_INCREASE":

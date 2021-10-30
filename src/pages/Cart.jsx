@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { CartItem } from '../components'
+import { CartItem, Button } from '../components'
 import { clearCart, removeCartItem, decreasePizza, increasePizza } from '../redux/actions/cart'
 import emptyCartImage from "../assets/img/empty-cart.png";
 
@@ -22,6 +22,10 @@ function Cart() {
     const onPizzaDelete = id => () => window.confirm("Удалить пиццу из корзины?") && dispatch(removeCartItem(id))
     const onPizzaDecrease = id => () => dispatch(decreasePizza(id));
     const onPizzaIncrease = id => () => dispatch(increasePizza(id));
+    
+    const onClickOrder = () => {
+      console.log("ВАШ ЗАКАЗ", items)
+    }
 
     return (
       <div className="content">
@@ -80,12 +84,13 @@ function Cart() {
                 <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
-
+                <Link to="/">
                 <span>Вернуться назад</span>
+                </Link>
               </a>
-              <div className="button pay-btn">
-                <span>Оплатить сейчас</span>
-              </div>
+                <Button onClick={onClickOrder} className="pay-btn">
+                  <span>Оплатить сейчас</span>
+                </Button>
             </div>
           </div>
         </div>
