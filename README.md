@@ -1,6 +1,6 @@
 # Интернет-магазин пицц #
-
-![image](https://user-images.githubusercontent.com/46257224/139535234-395a74ad-f8bc-4308-989f-469793b90a28.png)
+[Посмотреть](https://pizzabyreact.herokuapp.com/)
+![https://pizzabyreact.herokuapp.com/](https://user-images.githubusercontent.com/46257224/139535234-395a74ad-f8bc-4308-989f-469793b90a28.png)
 
 По видеоурокам с Youtube-канала [Archakov Blog](https://www.youtube.com/channel/UCdldbhAwO16vjnDwACTs5gQ)
 
